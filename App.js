@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { StyleSheet, Text, View, FlatList } from "react-native"
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
 export default function App() {
 	const [ people, setPeople ] = useState([
@@ -14,17 +14,26 @@ export default function App() {
 		{ name: "Dempsey", id: "9" },
 		{ name: "Payton", id: "10" }
 	])
+
+	const pressHandler = id => {
+		setPeople(prevState => prevState.filter(p => p.id !== id))
+	}
+
 	return (
 		<View style={styles.container}>
 			<FlatList
 				numColumns={2}
 				data={people}
 				renderItem={({ item }) => (
-					<Text
-						style={[styles.person, { marginLeft: item.id % 2 === 0 ? 10 : 0, marginRight: item.id % 2 === 1 ? 10 : 0 }]}
+					<TouchableOpacity
+						style={[
+							styles.person,
+							{ marginLeft: item.id % 2 === 0 ? 10 : 0, marginRight: item.id % 2 === 1 ? 10 : 0 }
+						]}
+						onPress={() => pressHandler(item.id)}
 					>
-						{item.name}
-					</Text>
+						<Text>{item.name}</Text>
+					</TouchableOpacity>
 				)}
 				keyExtractor={item => item.id} // Only necessary if data does not contain 'key' value
 			/>
