@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { FlatList, StyleSheet, Text, View } from "react-native"
+import AddToDo from "./components/AddToDo"
 import Header from './components/Header'
 import ToDoItem from "./components/ToDoItem"
 
@@ -15,10 +16,15 @@ export default function App() {
     setTodos(prevState => prevState.filter(item => item.key !== key))
   }
 
+  const addItem = text => {
+    setTodos(prevState => [...prevState, {text, key: todos.length + 1}])
+  }
+
 	return (
 		<View style={styles.container}>
       <Header />
 			<View style={styles.content}>
+        <AddToDo addItem={addItem}/>
 				<View style={styles.list}>
 					<FlatList data={todos} renderItem={({ item }) => <ToDoItem item={item} deleteItem={deleteItem}/>} />
 				</View>
