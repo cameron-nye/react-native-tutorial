@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { FlatList, StyleSheet, Text, View } from "react-native"
 import Header from './components/Header'
+import ToDoItem from "./components/ToDoItem"
+
 
 export default function App() {
 	const [ todos, setTodos ] = useState([
@@ -8,12 +10,17 @@ export default function App() {
 		{ text: "create an app", key: "2" },
 		{ text: "play on the switch", key: "3" }
 	])
+
+  const deleteItem = (key) => {
+    setTodos(prevState => prevState.filter(item => item.key !== key))
+  }
+
 	return (
 		<View style={styles.container}>
       <Header />
 			<View style={styles.content}>
 				<View style={styles.list}>
-					<FlatList data={todos} renderItem={({ item }) => <Text>{item.text}</Text>} />
+					<FlatList data={todos} renderItem={({ item }) => <ToDoItem item={item} deleteItem={deleteItem}/>} />
 				</View>
 			</View>
 		</View>
