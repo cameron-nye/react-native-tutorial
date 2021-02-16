@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { FlatList, StyleSheet, Text, View } from "react-native"
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native"
 import AddToDo from "./components/AddToDo"
 import Header from './components/Header'
 import ToDoItem from "./components/ToDoItem"
@@ -17,7 +17,11 @@ export default function App() {
   }
 
   const addItem = text => {
-    setTodos(prevState => [...prevState, {text, key: todos.length + 1}])
+    if(text.length < 3) Alert.alert('OOPS!', 'Todos must be at least 3 chars long', [{
+      text: 'Understood',
+      onPress: () => console.log('alert closed')
+    }])
+    setTodos(prevState => [...prevState, {text, key: Math.random().toString()}])
   }
 
 	return (
