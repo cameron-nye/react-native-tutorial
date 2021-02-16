@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
 		borderColor: "#bbb",
 		borderStyle: "solid",
 		borderRadius: 4,
-		padding: 8
+		padding: 8,
+    backgroundColor: '#fff'
 	},
 	btnWrapper: {
 		marginTop: 16,
